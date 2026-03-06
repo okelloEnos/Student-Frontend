@@ -1,0 +1,82 @@
+<div class="page-container">
+
+    <div class="card">
+
+        <!-- Page Title -->
+        <h2 class="page-title">📤 Upload CSV to Database</h2>
+        <p class="page-subtitle">
+            Select the processed CSV file. The system will read it,
+            add 5 to each student score and save all records to the database.
+        </p>
+
+        <!-- File Input -->
+        <div class="form-group">
+            <label>Select CSV File (.csv)</label>
+
+            <div class="file-input-wrapper">
+                <label for="fileInput" class="file-label" [class.disabled]="isLoading">
+                    📁 Choose File
+                </label>
+                <input id="fileInput" type="file" accept=".csv" (change)="onFileSelected($event)" [disabled]="isLoading"
+                    class="file-input-hidden" />
+            </div>
+
+            <!-- Show selected file name -->
+            <div *ngIf="selectedFile" class="file-name-display">
+                📄 {{ selectedFile.name }}
+                <span class="file-size">
+                    ({{ (selectedFile.size / (1024 * 1024)).toFixed(2) }} MB)
+                </span>
+            </div>
+
+            <div *ngIf="!selectedFile" class="no-file-text">
+                No file selected
+            </div>
+        </div>
+
+        <!-- Score Info Box -->
+        <div class="score-info-box">
+            <strong>ℹ️ Score Transformation:</strong>
+            <div class="score-steps">
+                <span class="score-step">Excel Score (55–75)</span>
+                <span class="arrow">→</span>
+                <span class="score-step">CSV Score (+10)</span>
+                <span class="arrow">→</span>
+                <span class="score-step highlight">Database Score (+5)</span>
+            </div>
+            <p>Final database score = original Excel score + 15</p>
+        </div>
+
+        <!-- Upload Button — disabled until file is selected -->
+        <button (click)="upload()" [disabled]="!selectedFile || isLoading" class="btn-primary">
+            <span *ngIf="!isLoading">Upload to Database</span>
+            <span *ngIf="isLoading">⏳ Uploading... Please wait</span>
+        </button>
+
+        <!-- Loading Message -->
+        <div *ngIf="isLoading" class="info-box">
+            ⏳ Reading CSV and saving records to the database.
+            This may take several minutes for large files. Please do not close this page.
+        </div>
+
+        <!-- Success Message -->
+        <div *ngIf="success" class="success-box">
+            <strong>✅ Upload Complete!</strong>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">{{ totalSaved | number }}</div>
+                    <div class="stat-label">Records Saved</div>
+                </div>
+            </div>
+            <p class="note">
+                💡 All records are now available in the Report page.
+            </p>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="error" class="error-box">
+            <strong>❌ Error:</strong> {{ error }}
+        </div>
+
+    </div>
+</div>

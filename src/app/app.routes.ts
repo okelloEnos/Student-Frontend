@@ -14,6 +14,12 @@ export const routes: Routes = [
                 .then(m => m.DataProcessingComponent)
     },
     {
+        path: 'upload',
+        loadComponent: () =>
+            import('./components/data-upload/data-upload.component')
+                .then(m => m.DataUploadComponent)
+    },
+    {
         path: '',
         redirectTo: 'generate',
         pathMatch: 'full'
