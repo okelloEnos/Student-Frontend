@@ -6,5 +6,16 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./components/data-generation/data-generation.component')
                 .then(m => m.DataGenerationComponent)
+    },
+    {
+        path: 'process',
+        loadComponent: () =>
+            import('./components/data-processing/data-processing.component')
+                .then(m => m.DataProcessingComponent)
+    },
+    {
+        path: '',
+        redirectTo: 'generate',
+        pathMatch: 'full'
     }
 ];

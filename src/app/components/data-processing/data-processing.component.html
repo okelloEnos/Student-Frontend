@@ -1,0 +1,65 @@
+<div class="page-container">
+
+    <div class="card">
+
+        <!-- Page Title -->
+        <h2 class="page-title">🔄 Process Excel to CSV</h2>
+        <p class="page-subtitle">
+            Select the generated Excel file. The system will read it,
+            add 10 to each student score and save the result as a CSV file.
+        </p>
+
+        <!-- File Input -->
+        <div class="form-group">
+            <label>Select Excel File (.xlsx)</label>
+
+            <div class="file-input-wrapper">
+                <label for="fileInput" class="file-label" [class.disabled]="isLoading">
+                    📁 Choose File
+                </label>
+                <input id="fileInput" type="file" accept=".xlsx" (change)="onFileSelected($event)"
+                    [disabled]="isLoading" class="file-input-hidden" />
+            </div>
+
+            <!-- Show selected file name -->
+            <div *ngIf="selectedFile" class="file-name-display">
+                📄 {{ selectedFile.name }}
+                <span class="file-size">
+                    ({{ (selectedFile.size / (1024 * 1024)).toFixed(2) }} MB)
+                </span>
+            </div>
+
+            <div *ngIf="!selectedFile" class="no-file-text">
+                No file selected
+            </div>
+        </div>
+
+        <!-- Process Button — disabled until file is selected -->
+        <button (click)="process()" [disabled]="!selectedFile || isLoading" class="btn-primary">
+            <span *ngIf="!isLoading">Process Excel File</span>
+            <span *ngIf="isLoading">⏳ Processing... Please wait</span>
+        </button>
+
+        <!-- Loading Message -->
+        <div *ngIf="isLoading" class="info-box">
+            ⏳ Reading Excel and generating CSV file.
+            This may take several minutes for large files. Please do not close this page.
+        </div>
+
+        <!-- Success Message -->
+        <div *ngIf="result" class="success-box">
+            <strong>✅ File Processed Successfully!</strong>
+            <p>CSV file saved at:</p>
+            <code>{{ result }}</code>
+            <p class="note">
+                💡 Note: All student scores have been increased by 10.
+            </p>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="error" class="error-box">
+            <strong>❌ Error:</strong> {{ error }}
+        </div>
+
+    </div>
+</div>
