@@ -1,0 +1,140 @@
+<div class="page-container">
+
+    <h2 class="page-title">📋 Student Report</h2>
+
+    <!-- FILTERS SECTION -->
+    <div class="filters-card">
+
+        <div class="filters-row">
+
+            <!-- Search by Student ID -->
+            <div class="filter-group">
+                <label>Student ID</label>
+                <input type="number" [(ngModel)]="filters.studentId" placeholder="Search by ID" class="filter-input" />
+            </div>
+
+            <!-- Filter by Class -->
+            <div class="filter-group">
+                <label>Class</label>
+                <select [(ngModel)]="filters.studentClass" class="filter-input">
+                    <option value="">All Classes</option>
+                    <option *ngFor="let cls of classes" [value]="cls">
+                        {{ cls }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="filter-actions">
+                <button (click)="search()" class="btn-search">
+                    🔍 Search
+                </button>
+                <button (click)="clearFilters()" class="btn-clear">
+                    ✕ Clear
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- EXPORT + RECORD COUNT ROW -->
+    <div class="table-toolbar">
+
+        <!-- Record count -->
+        <div class="record-count">
+            <span *ngIf="!isLoading">
+                Showing <strong>{{ startRecord | number }}</strong>
+                – <strong>{{ endRecord | number }}</strong>
+                of <strong>{{ pagination.totalElements | number }}</strong> records
+            </span>
+            <span *ngIf="isLoading">Loading...</span>
+        </div>
+
+        <!-- Export Buttons -->
+        <div class="export-buttons">
+            <button (click)="exportExcel()" [disabled]="isExporting" class="btn-export btn-excel">
+                📥 Excel
+            </button>
+            <button (click)="exportCsv()" [disabled]="isExporting" class="btn-export btn-csv">
+                📥 CSV
+            </button>
+            <button (click)="exportPdf()" [disabled]="isExporting" class="btn-export btn-pdf">
+                📥 PDF
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Exporting indicator -->
+    <div *ngIf="isExporting" class="info-box">
+        ⏳ Preparing export file, please wait...
+    </div>
+
+    <!-- DATA TABLE -->
+    <div class="table-wrapper">
+
+        <!-- Loading overlay -->
+        <div *ngIf="isLoading" class="loading-overlay">
+            ⏳ Loading students...
+        </div>
+
+        <!-- Error message -->
+        <div *ngIf="error" class="error-box">
+            <strong>❌ Error:</strong> {{ error }}
+        </div>
+
+        <!-- Table -->
+        <table *ngIf="!isLoading && students.length > 0" class="data-table">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>DOB</th>
+                    <th>Class</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students">
+                    <td>{{ student.studentId }}</td>
+                    <td>{{ student.firstName }}</td>
+                    <td>{{ student.lastName }}</td>
+                    <td>{{ student.dob }}</td>
+                    <td>
+                        <span class="class-badge">{{ student.studentClass }}</span>
+                    </td>
+                    <td>
+                        <span class="score-badge">{{ student.score }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Empty state -->
+        <div *ngIf="!isLoading && students.length === 0 && !error" class="empty-state">
+            No students found matching your filters.
+        </div>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination" *ngIf="pagination.totalPages > 0">
+
+        <button (click)="prevPage()" [disabled]="pagination.page === 0" class="btn-page">
+            ← Previous
+        </button>
+
+        <span class="page-info">
+            Page <strong>{{ currentPage }}</strong>
+            of <strong>{{ pagination.totalPages | number }}</strong>
+        </span>
+
+        <button (click)="nextPage()" [disabled]="pagination.page >= pagination.totalPages - 1" class="btn-page">
+            Next →
+        </button>
+
+    </div>
+
+</div>

@@ -20,6 +20,12 @@ export const routes: Routes = [
                 .then(m => m.DataUploadComponent)
     },
     {
+        path: 'report',
+        loadComponent: () =>
+            import('./components/report/report.component')
+                .then(m => m.ReportComponent)
+    },
+    {
         path: '',
         redirectTo: 'generate',
         pathMatch: 'full'
