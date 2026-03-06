@@ -1,0 +1,43 @@
+<div class="page-container">
+
+    <div class="card">
+
+        <!-- Page Title -->
+        <h2 class="page-title">📊 Generate Student Data</h2>
+        <p class="page-subtitle">
+            Enter the number of student records to generate and save as an Excel file.
+        </p>
+
+        <!-- Input Section -->
+        <div class="form-group">
+            <label for="numberOfRecords">Number of Records</label>
+            <input id="numberOfRecords" type="number" [(ngModel)]="numberOfRecords" min="1"
+                placeholder="Enter number of records" [disabled]="isLoading" class="form-input" />
+        </div>
+
+        <!-- Generate Button -->
+        <button (click)="generate()" [disabled]="isLoading" class="btn-primary">
+            <span *ngIf="!isLoading">Generate Excel File</span>
+            <span *ngIf="isLoading">⏳ Generating... Please wait</span>
+        </button>
+
+        <!-- Loading Message -->
+        <div *ngIf="isLoading" class="info-box">
+            ⏳ Generating <strong>{{ numberOfRecords | number }}</strong> records.
+            This may take several minutes. Please do not close this page.
+        </div>
+
+        <!-- Success Message -->
+        <div *ngIf="result" class="success-box">
+            <strong>✅ File Generated Successfully!</strong>
+            <p>File saved at:</p>
+            <code>{{ result }}</code>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="error" class="error-box">
+            <strong>❌ Error:</strong> {{ error }}
+        </div>
+
+    </div>
+</div>
