@@ -3,10 +3,11 @@
     <div class="card">
 
         <!-- Page Title -->
-        <h2 class="page-title">📤 Upload CSV to Database</h2>
+        <h2 class="page-title">CSV to Database</h2>
         <p class="page-subtitle">
-            Select the processed CSV file. The system will read it,
-            add 5 to each student score and save all records to the database.
+            Select the CSV file that was generated then the system will read through all student records, add 5 points
+            to each student's score as the final stage of the data transformation
+            process and save every record into the database.
         </p>
 
         <!-- File Input -->
@@ -35,7 +36,7 @@
         </div>
 
         <!-- Score Info Box -->
-        <div class="score-info-box">
+        <!-- <div class="score-info-box">
             <strong>ℹ️ Score Transformation:</strong>
             <div class="score-steps">
                 <span class="score-step">Excel Score (55–75)</span>
@@ -45,23 +46,23 @@
                 <span class="score-step highlight">Database Score (+5)</span>
             </div>
             <p>Final database score = original Excel score + 15</p>
-        </div>
+        </div> -->
 
         <!-- Upload Button — disabled until file is selected -->
         <button (click)="upload()" [disabled]="!selectedFile || isLoading" class="btn-primary">
-            <span *ngIf="!isLoading">Upload to Database</span>
-            <span *ngIf="isLoading">⏳ Uploading... Please wait</span>
+            <span *ngIf="!isLoading">Upload</span>
+            <span *ngIf="isLoading">Uploading...</span>
         </button>
 
         <!-- Loading Message -->
         <div *ngIf="isLoading" class="info-box">
-            ⏳ Reading CSV and saving records to the database.
+            Reading CSV and saving records to the database.
             This may take several minutes for large files. Please do not close this page.
         </div>
 
         <!-- Success Message -->
         <div *ngIf="success" class="success-box">
-            <strong>✅ Upload Complete!</strong>
+            <strong>Upload Complete!</strong>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">{{ totalSaved | number }}</div>
@@ -69,13 +70,13 @@
                 </div>
             </div>
             <p class="note">
-                💡 All records are now available in the Report page.
+                All records are now available in the Student Report page.
             </p>
         </div>
 
         <!-- Error Message -->
         <div *ngIf="error" class="error-box">
-            <strong>❌ Error:</strong> {{ error }}
+            <strong>Error:</strong> {{ error }}
         </div>
 
     </div>

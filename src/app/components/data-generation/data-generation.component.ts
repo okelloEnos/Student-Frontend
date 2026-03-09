@@ -12,8 +12,8 @@ import { StudentService } from '../../services/student.service';
 })
 export class DataGenerationComponent {
 
-  // Default value is 1000000 as per assessment requirement
-  numberOfRecords: number = 1000000;
+  // numberOfRecords: number = 1000000;
+  numberOfRecords: number | null = null;
 
   // Controls the loading spinner
   isLoading: boolean = false;

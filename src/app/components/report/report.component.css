@@ -46,6 +46,16 @@
     outline: none;
 }
 
+select.filter-input {
+    padding-right: 32px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    cursor: pointer;
+}
+
 .filter-input:focus {
     border-color: #0077cc;
 }
@@ -190,21 +200,15 @@
 }
 
 .class-badge {
-    background-color: #e8f0fe;
     color: #003366;
-    padding: 3px 10px;
-    border-radius: 12px;
     font-size: 12px;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .score-badge {
-    background-color: #003366;
-    color: white;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
+    color: #003366;
 }
 
 .empty-state {

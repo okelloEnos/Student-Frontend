@@ -1,6 +1,6 @@
 <div class="page-container">
 
-    <h2 class="page-title">📋 Student Report</h2>
+    <h2 class="page-title">Student Report</h2>
 
     <!-- FILTERS SECTION -->
     <div class="filters-card">
@@ -27,7 +27,7 @@
             <!-- Action Buttons -->
             <div class="filter-actions">
                 <button (click)="search()" class="btn-search">
-                    🔍 Search
+                    Search
                 </button>
                 <button (click)="clearFilters()" class="btn-clear">
                     ✕ Clear
@@ -54,13 +54,13 @@
         <!-- Export Buttons -->
         <div class="export-buttons">
             <button (click)="exportExcel()" [disabled]="isExporting" class="btn-export btn-excel">
-                📥 Excel
+                📋 Export Student Report as Excel
             </button>
             <button (click)="exportCsv()" [disabled]="isExporting" class="btn-export btn-csv">
-                📥 CSV
+                📋 Export Student Report as CSV
             </button>
             <button (click)="exportPdf()" [disabled]="isExporting" class="btn-export btn-pdf">
-                📥 PDF
+                📋 Export Student Report as PDF
             </button>
         </div>
 
@@ -68,7 +68,7 @@
 
     <!-- Exporting indicator -->
     <div *ngIf="isExporting" class="info-box">
-        ⏳ Preparing export file, please wait...
+        Preparing export file, please wait...
     </div>
 
     <!-- DATA TABLE -->
@@ -76,12 +76,12 @@
 
         <!-- Loading overlay -->
         <div *ngIf="isLoading" class="loading-overlay">
-            ⏳ Loading students...
+            Loading students...
         </div>
 
         <!-- Error message -->
         <div *ngIf="error" class="error-box">
-            <strong>❌ Error:</strong> {{ error }}
+            <strong>Error:</strong> {{ error }}
         </div>
 
         <!-- Table -->

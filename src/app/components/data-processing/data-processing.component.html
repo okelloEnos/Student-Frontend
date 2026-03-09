@@ -3,10 +3,11 @@
     <div class="card">
 
         <!-- Page Title -->
-        <h2 class="page-title">🔄 Process Excel to CSV</h2>
+        <h2 class="page-title">Excel to CSV</h2>
         <p class="page-subtitle">
-            Select the generated Excel file. The system will read it,
-            add 10 to each student score and save the result as a CSV file.
+            Select the Excel file that was generated then the system will read through all student records, add 10
+            points to each student's score as part of the data transformation process,
+            and save the updated records into a new CSV file.
         </p>
 
         <!-- File Input -->
@@ -36,29 +37,29 @@
 
         <!-- Process Button — disabled until file is selected -->
         <button (click)="process()" [disabled]="!selectedFile || isLoading" class="btn-primary">
-            <span *ngIf="!isLoading">Process Excel File</span>
-            <span *ngIf="isLoading">⏳ Processing... Please wait</span>
+            <span *ngIf="!isLoading">Process</span>
+            <span *ngIf="isLoading">Processing...</span>
         </button>
 
         <!-- Loading Message -->
         <div *ngIf="isLoading" class="info-box">
-            ⏳ Reading Excel and generating CSV file.
+            Reading Excel and generating CSV file.
             This may take several minutes for large files. Please do not close this page.
         </div>
 
         <!-- Success Message -->
         <div *ngIf="result" class="success-box">
-            <strong>✅ File Processed Successfully!</strong>
+            <strong>File Processed Successfully!</strong>
             <p>CSV file saved at:</p>
             <code>{{ result }}</code>
-            <p class="note">
+            <!-- <p class="note">
                 💡 Note: All student scores have been increased by 10.
-            </p>
+            </p> -->
         </div>
 
         <!-- Error Message -->
         <div *ngIf="error" class="error-box">
-            <strong>❌ Error:</strong> {{ error }}
+            <strong>Error:</strong> {{ error }}
         </div>
 
     </div>
